@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { fetchMovieId } from "../components/API/API";
 import { DNA } from "react-loader-spinner";
-import style from "../index.module.css";
+import "../index.css";
 import GoBackButton from "../components/goBackButton/GoBackButton";
 
 const MovieDetailsPage = () => {
@@ -29,8 +29,8 @@ const MovieDetailsPage = () => {
   return (
     <>
       <GoBackButton />
-      <div className={style.wrapImg}>
-        <div className={style.wrapDetails}>
+      <div className="wrapImg">
+        <div className="wrapDetails">
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={`${movie.original_title}`}
@@ -45,7 +45,7 @@ const MovieDetailsPage = () => {
           <p>{movie.genres?.map((gener) => gener.name + " ")}</p>
         </div>
       </div>
-      <div className={style.wrapAddition}>
+      <div className="wrapAddition">
         <h4>Additional information</h4>
         <ul>
           <li>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MovieList from "../components/movieList/MovieList";
 import { fetchMovieQuery } from "../components/API/API";
 import { Link, useSearchParams } from "react-router-dom";
-import style from "../index.module.css";
+import "../index.css";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
@@ -35,7 +35,7 @@ const MoviesPage = () => {
   };
 
   return (
-    <div className={style.wrap}>
+    <div className="wrap">
       <input
         type="text"
         placeholder="Search movies..."

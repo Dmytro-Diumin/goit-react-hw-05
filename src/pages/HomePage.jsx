@@ -10,7 +10,6 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [popularMovies, setPopularMovies] = useState([]);
-  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {

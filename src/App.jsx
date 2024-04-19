@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.module.css";
-import "./index.module.css";
+import "./App.css";
+import "./index.css";
 import { DNA } from "react-loader-spinner";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
