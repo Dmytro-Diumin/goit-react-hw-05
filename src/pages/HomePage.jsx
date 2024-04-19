@@ -28,14 +28,10 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    setLoader(isLoading);
-  }, [isLoading]);
-
   return (
     <div>
       <h1>Trending today</h1>
-      {loader ? (
+      {isLoading ? (
         <DNA />
       ) : error ? (
         <div>Error: {error.message}</div>
