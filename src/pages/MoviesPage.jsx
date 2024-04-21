@@ -43,6 +43,7 @@ const MoviesPage = () => {
     e.preventDefault();
     if (searchTerm.trim() !== "") {
       setSearchParams({ query: searchTerm });
+      setSearchTerm("");
     } else {
       toast.error("Please enter a search term.", {
         style: toastStyles,
@@ -63,12 +64,7 @@ const MoviesPage = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <MovieList
-        movies={searchedMovies}
-        renderMovieLink={(movie) => (
-          <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-        )}
-      />
+      <MovieList movies={searchedMovies} />
     </div>
   );
 };
