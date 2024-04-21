@@ -10,6 +10,7 @@ const MoviesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [error, setError] = useState(null);
   const movie = searchParams.get("query");
 
   const toastStyles = {
@@ -19,36 +20,40 @@ const MoviesPage = () => {
   };
 
   useEffect(() => {
+    if (!movie) return;
     async function fetchMovies() {
       try {
         const moviesData = await fetchMovieQuery(movie);
         setSearchedMovies(moviesData.results);
+        setError(null);
       } catch (error) {
-        console.error("Failed to fetch movies:", error);
+        setError(error.message || "Failed to fetch movies.");
+        setSearchedMovies([]);
       }
     }
 
-    if (movie !== "") {
+    if (movie !== null && movie !== "") {
       fetchMovies();
     } else {
       setSearchedMovies([]);
     }
   }, [movie]);
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
-    try {
-      const moviesData = await fetchMovieQuery(searchTerm);
-      setMovies(moviesData.results);
+    if (searchTerm.trim() !== "") {
       setSearchParams({ query: searchTerm });
-    } catch (error) {
-      console.error("Failed to fetch movies:", error);
+    } else {
+      toast.error("Please enter a search term.", {
+        style: toastStyles,
+      });
     }
   };
 
   return (
     <div className="wrap">
       <Toaster position="top-right" reverseOrder={false} />
+      {error && <div className="error">{error}</div>}
       <form onSubmit={handleSearch}>
         <input
           type="text"
@@ -59,7 +64,7 @@ const MoviesPage = () => {
         <button type="submit">Search</button>
       </form>
       <MovieList
-        movies={movies}
+        movies={searchedMovies}
         renderMovieLink={(movie) => (
           <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
         )}
