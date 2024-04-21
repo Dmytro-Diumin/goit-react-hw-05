@@ -28,21 +28,23 @@ const MoviesPage = () => {
     }
   }, [movie]);
 
-  const handleSearch = () => {
+  const handleSearch = async (e) => {
+    e.preventDefault();
     setMovies(searchedMovies);
-    setSearchTerm("");
     setSearchParams({ query: searchTerm });
   };
 
   return (
     <div className="wrap">
-      <input
-        type="text"
-        placeholder="Search movies..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Search movies..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
       <MovieList
         movies={movies}
         renderMovieLink={(movie) => (
