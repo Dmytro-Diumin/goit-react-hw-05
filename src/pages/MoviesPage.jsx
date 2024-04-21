@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MovieList from "../components/movieList/MovieList";
 import { fetchMovieQuery } from "../components/API/API";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import "../index.css";
 import toast, { Toaster } from "react-hot-toast";
 

@@ -3,10 +3,9 @@ import { fetchMovies } from "../components/API/API";
 import MovieList from "../components/movieList/MovieList";
 import { Link } from "react-router-dom";
 import { DNA } from "react-loader-spinner";
+import NotFoundPage from "./NotFoundPage";
 
 const HomePage = () => {
-  const [selectedMovieId, setSelectedMovieId] = useState(null);
-  const [filteredMovies, setFilteredMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [popularMovies, setPopularMovies] = useState([]);
@@ -28,22 +27,14 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      {isLoading && <DNA />}
+
+      {error && <NotFoundPage />}
+
       <h1>Trending today</h1>
-      {isLoading ? (
-        <DNA />
-      ) : error ? (
-        <div>Error: {error.message}</div>
-      ) : (
-        <MovieList
-          movies={filteredMovies.length > 0 ? filteredMovies : popularMovies}
-          renderMovieLink={(movie) => (
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-          )}
-        />
-      )}
-      {selectedMovieId && <div>Selected Movie ID: {selectedMovieId}</div>}
-    </div>
+      {popularMovies.length > 0 && <MovieList movies={popularMovies} />}
+    </>
   );
 };
 
